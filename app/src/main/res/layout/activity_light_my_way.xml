@@ -1,26 +1,41 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ff14e2ff" tools:context=".LightMyWay"
-    android:clickable="false">
+    android:animateLayoutChanges="true"
+    android:background="#ccffff"
+    tools:context=".LightMyWay">
 
-    <ToggleButton
+    <Button
+        android:id="@+id/btnSettings"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="top|end"
+        android:layout_margin="@dimen/padding_extra_small"
+        android:background="@drawable/settings" />
+
+    <Button
+        android:id="@+id/btnToggle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Turn on"
-        android:id="@+id/btnLightOnOff"
-        android:checked="false"
-        android:clickable="true"
-        android:enabled="true"
-        android:onClick="ToggleLight"
-        android:textOn="Turn off"
-        android:textOff="Turn on"
+        android:layout_gravity="center"
+        android:background="@drawable/main_theme_button_background"
         android:minHeight="125dp"
         android:minWidth="250dp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="50dp"
-        android:textColor="#ff14e2ff"
-        android:background="#ff2c00ca"
-        android:typeface="sans" />
-</RelativeLayout>
+        android:padding="@dimen/padding_medium"
+        android:text="Light"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="50sp" />
+
+    <TextView
+        android:id="@+id/tvBatteryMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:padding="@dimen/padding_small"
+        android:text="** Light drains the battery more quickly **"
+        android:textSize="12sp"
+        android:visibility="gone" />
+</FrameLayout>

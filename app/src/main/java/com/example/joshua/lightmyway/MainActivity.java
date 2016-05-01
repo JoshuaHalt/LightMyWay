@@ -36,14 +36,7 @@ public class MainActivity extends Activity {
         tvBatteryMessage = (TextView) findViewById(R.id.tvBatteryMessage);
         sbBrightness = (SeekBar) findViewById(R.id.sbBrightness);
 
-        try {
-            Integer screenBrightness = Settings.System.getInt(getApplicationContext().getContentResolver(),
-                    Settings.System.SCREEN_BRIGHTNESS);
-
-            sbBrightness.setProgress((int) (screenBrightness * SCREEN_BRIGHTNESS_MULTIPLIER));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        setSeekBarBrightness();
 
         btnSettings.setOnClickListener(settingsClick);
         btnToggle.setOnClickListener(toggleLight);
@@ -106,6 +99,17 @@ public class MainActivity extends Activity {
         }
     };
 
+    private void setSeekBarBrightness() {
+        try {
+            Integer screenBrightness = Settings.System.getInt(getApplicationContext().getContentResolver(),
+                    Settings.System.SCREEN_BRIGHTNESS);
+
+            sbBrightness.setProgress((int) (screenBrightness * SCREEN_BRIGHTNESS_MULTIPLIER));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void on() {
         if (camera == null || params == null)
             return;
@@ -150,5 +154,12 @@ public class MainActivity extends Activity {
         }
 
         super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        setSeekBarBrightness();
+
+        super.onResume();
     }
 }

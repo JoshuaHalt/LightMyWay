@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
@@ -7,69 +7,78 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/padding_medium"
-        android:background="@color/teal"
-        android:gravity="center_vertical"
-        android:padding="@dimen/padding_small">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="@dimen/padding_small"
-            android:layout_marginRight="@dimen/padding_small"
-            android:contentDescription="settings_icon"
-            android:src="@drawable/settings" />
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="start"
-            android:text="Settings"
-            android:textSize="25sp" />
+            android:layout_marginBottom="@dimen/padding_medium"
+            android:background="@color/teal"
+            android:gravity="center_vertical"
+            android:padding="@dimen/padding_small">
 
-    </LinearLayout>
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="@dimen/padding_small"
+                android:layout_marginRight="@dimen/padding_small"
+                android:contentDescription="settings_icon"
+                android:src="@drawable/settings" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/padding_medium"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="@dimen/padding_small"
-        android:weightSum="100">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="Settings"
+                android:textSize="25sp" />
 
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="@dimen/padding_small"
-            android:layout_marginRight="@dimen/padding_small"
-            android:contentDescription="settings_icon"
-            android:src="@drawable/light_bulb" />
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/padding_small"
-            android:layout_marginRight="@dimen/padding_small"
-            android:layout_weight="95"
-            android:gravity="start"
-            android:text="Always keep light on, even when out of the app or screen is off"
-            android:textSize="15sp" />
+            android:layout_marginBottom="@dimen/padding_medium"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/padding_small"
+            android:weightSum="100">
 
-        <CheckBox
-            android:id="@+id/cbLightAlwaysOn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/custom_checkbox"
-            android:button="@null" />
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="@dimen/padding_small"
+                android:layout_marginRight="@dimen/padding_small"
+                android:contentDescription="settings_icon"
+                android:src="@drawable/light_bulb" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/padding_small"
+                android:layout_marginRight="@dimen/padding_small"
+                android:layout_weight="95"
+                android:gravity="start"
+                android:text="Always keep light on, even when out of the app or screen is off"
+                android:textSize="15sp" />
+
+            <CheckBox
+                android:id="@+id/cbLightAlwaysOn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_checkbox"
+                android:button="@null" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="@dimen/padding_small"
         android:gravity="center"
         android:text="Version 2.0, created by Joshua Halt" />
 
-</LinearLayout>
+</FrameLayout>

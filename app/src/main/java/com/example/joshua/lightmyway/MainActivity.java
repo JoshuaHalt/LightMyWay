@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.hardware.Camera;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +21,9 @@ public class MainActivity extends Activity {
     private Button btnSettings;
     private Button btnToggle;
     private TextView tvBatteryMessage;
+    private SeekBar sbBrightness;
+
+    private final Float SCREEN_BRIGHTNESS_MULTIPLIER = .392156862745098039215F;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +34,20 @@ public class MainActivity extends Activity {
         btnSettings = (Button) findViewById(R.id.btnSettings);
         btnToggle = (Button) findViewById(R.id.btnToggle);
         tvBatteryMessage = (TextView) findViewById(R.id.tvBatteryMessage);
+        sbBrightness = (SeekBar) findViewById(R.id.sbBrightness);
 
-        btnSettings.setOnClickListener(settings);
+        try {
+            Integer screenBrightness = Settings.System.getInt(getApplicationContext().getContentResolver(),
+                    Settings.System.SCREEN_BRIGHTNESS);
+
+            sbBrightness.setProgress((int) (screenBrightness * SCREEN_BRIGHTNESS_MULTIPLIER));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        btnSettings.setOnClickListener(settingsClick);
         btnToggle.setOnClickListener(toggleLight);
+        sbBrightness.setOnSeekBarChangeListener(sbChanged);
     }
 
     private void getCamera() {
@@ -65,10 +82,27 @@ public class MainActivity extends Activity {
         }
     };
 
-    View.OnClickListener settings = new View.OnClickListener() {
+    View.OnClickListener settingsClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+        }
+    };
+
+    SeekBar.OnSeekBarChangeListener sbChanged = new SeekBar.OnSeekBarChangeListener() {
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            WindowManager.LayoutParams layout = getWindow().getAttributes();
+            layout.screenBrightness = (float) progress / 100;
+            getWindow().setAttributes(layout);
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
         }
     };
 

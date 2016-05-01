@@ -6,6 +6,23 @@
     android:background="@color/background"
     tools:context=".LightMyWay">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large"
+        android:gravity="center"
+        android:paddingTop="35dp"
+        android:text="screen brightness"
+        android:textSize="18sp" />
+
+    <SeekBar
+        android:id="@+id/sbBrightness"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large"
+        android:max="100"
+        android:paddingTop="50dp" />
+
     <Button
         android:id="@+id/btnSettings"
         android:layout_width="24dp"

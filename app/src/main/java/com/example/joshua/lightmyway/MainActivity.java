@@ -1,6 +1,7 @@
 package com.example.joshua.lightmyway;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +15,7 @@ public class MainActivity extends Activity {
     private boolean isFlashOn = false;
     private Camera.Parameters params;
 
+    private Button btnSettings;
     private Button btnToggle;
     private TextView tvBatteryMessage;
 
@@ -23,9 +25,11 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_light_my_way);
         setTitle("Light My Way");
 
+        btnSettings = (Button) findViewById(R.id.btnSettings);
         btnToggle = (Button) findViewById(R.id.btnToggle);
         tvBatteryMessage = (TextView) findViewById(R.id.tvBatteryMessage);
 
+        btnSettings.setOnClickListener(settings);
         btnToggle.setOnClickListener(toggleLight);
     }
 
@@ -64,7 +68,7 @@ public class MainActivity extends Activity {
     View.OnClickListener settings = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            //open settings...
+            startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
         }
     };
 
@@ -96,15 +100,21 @@ public class MainActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        off();
-        releaseCamera();
+        if (Helper.getPref(getApplicationContext(), Helper.LIGHT_ALWAYS_ON) != 1) {
+            off();
+            releaseCamera();
+        }
+
         super.onBackPressed();
     }
 
     @Override
     public void onPause() {
-        off();
-        releaseCamera();
+        if (Helper.getPref(getApplicationContext(), Helper.LIGHT_ALWAYS_ON) != 1) {
+            off();
+            releaseCamera();
+        }
+
         super.onPause();
     }
 }

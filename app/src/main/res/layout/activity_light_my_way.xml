@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:background="#ccffff"
+    android:background="@color/background"
     tools:context=".LightMyWay">
 
     <Button
@@ -25,7 +25,7 @@
         android:padding="@dimen/padding_medium"
         android:text="Light"
         android:textAllCaps="false"
-        android:textColor="#000000"
+        android:textColor="@color/black"
         android:textSize="50sp" />
 
     <TextView
@@ -38,4 +38,5 @@
         android:text="** Light drains the battery more quickly **"
         android:textSize="12sp"
         android:visibility="gone" />
+
 </FrameLayout>

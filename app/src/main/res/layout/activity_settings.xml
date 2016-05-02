@@ -79,6 +79,6 @@
         android:layout_gravity="bottom"
         android:layout_marginBottom="@dimen/padding_small"
         android:gravity="center"
-        android:text="Version 2.0, created by Joshua Halt" />
+        android:text="Version 2.0.1, created by Joshua Halt" />
 
 </FrameLayout>

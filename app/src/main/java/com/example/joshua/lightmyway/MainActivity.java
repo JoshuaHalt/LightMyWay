@@ -24,6 +24,7 @@ public class MainActivity extends Activity {
     private SeekBar sbBrightness;
 
     private final Float SCREEN_BRIGHTNESS_MULTIPLIER = .392156862745098039215F;
+    private Integer returnSeekBarValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +79,9 @@ public class MainActivity extends Activity {
     View.OnClickListener settingsClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+            Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+            intent.putExtra(Helper.EXTRA_SCREEN_BRIGHTNESS_LEVEL, (float) sbBrightness.getProgress() / 100);
+            startActivityForResult(intent, Helper.REQUEST_SETTINGS);
         }
     };
 
@@ -137,6 +140,13 @@ public class MainActivity extends Activity {
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Helper.REQUEST_SETTINGS)
+            if (resultCode == RESULT_OK && data.hasExtra(Helper.EXTRA_SCREEN_BRIGHTNESS_LEVEL))
+                returnSeekBarValue = (int) (data.getFloatExtra(Helper.EXTRA_SCREEN_BRIGHTNESS_LEVEL, 0) * 100);
+    }
+
+    @Override
     public void onBackPressed() {
         if (Helper.getPref(getApplicationContext(), Helper.LIGHT_ALWAYS_ON) != 1) {
             off();
@@ -158,7 +168,11 @@ public class MainActivity extends Activity {
 
     @Override
     public void onResume() {
-        setSeekBarBrightness();
+        if (returnSeekBarValue != null) {
+            sbBrightness.setProgress(returnSeekBarValue);
+            returnSeekBarValue = null;
+        } else
+            setSeekBarBrightness();
 
         super.onResume();
     }

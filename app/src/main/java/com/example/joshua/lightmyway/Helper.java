@@ -7,6 +7,10 @@ import android.preference.PreferenceManager;
 public final class Helper {
     public static String LIGHT_ALWAYS_ON = "lightAlwaysOn";
 
+    public static String EXTRA_SCREEN_BRIGHTNESS_LEVEL = "screenBrightness";
+
+    public static Integer REQUEST_SETTINGS = 0;
+
     public static void setPref(Context context, String key, Integer value) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
